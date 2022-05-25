@@ -1,11 +1,21 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
+import NewsDetail from '../views/NewsDetail.vue';
 
 const routes = [
   {
     path: '/',
     name: 'home',
     component: HomeView,
+  },
+  {
+    path: '/detail',
+    name: 'newsDetail',
+    component: NewsDetail,
+    props: (route) => ({
+      news: route.params.newsContent,
+      ...route.params,
+    }),
   },
   {
     path: '/about',
