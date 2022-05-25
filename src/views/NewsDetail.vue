@@ -91,12 +91,16 @@
           </div>
         </div>
       </div>
+      <div>
+        <FooterView />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import NavBar from '@/components/NavBar.vue';
+import FooterView from '@/components/FooterView.vue';
 import RecentlyViewed from '../components/RecentlyViewed.vue';
 
 export default {
@@ -104,6 +108,19 @@ export default {
   components: {
     NavBar,
     RecentlyViewed,
+    FooterView,
+  },
+  mounted() {
+    this.updateHistory();
+  },
+  methods: {
+    updateHistory() {
+      let historyList = localStorage.getItem('newsHistory');
+      historyList = historyList ? historyList.split(',') : [];
+
+      historyList.push(this.newsContent.title);
+      localStorage.setItem('newsHistory', historyList.toString());
+    },
   },
   data() {
     return {
@@ -117,9 +134,6 @@ export default {
         date.getDate() > 9 ? '' : '0'
       }${date.getDate()}`;
     },
-  },
-  mounted() {
-    console.log('news props', this.newsContent);
   },
 };
 </script>

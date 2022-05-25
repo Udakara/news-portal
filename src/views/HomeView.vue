@@ -4,18 +4,18 @@
       <div class="sticky top-0 pt-0 pb-4 py-4 w-full">
         <NavBar />
       </div>
-      <div role="main" class="w-full sm:w-full md:w-full pt-1 px-10">
-        <!-- content area -->
-        <div class="grid gap-4 md:grid-cols-3 sm:grid-cols-1 mx-auto container">
-          <div v-for="(news, index) in newsList" :key="index">
-            <CardView :news="news" />
-          </div>
+      <div role="main" class="w-full sm:w-full md:w-full pt-1 px-10 col-span-4">
+        <SearchBar @searchNews="updateNewsList" />
+      </div>
+      <div class="grid gap-4 md:grid-cols-3 sm:grid-cols-1 mx-5 container">
+        <div v-for="(news, index) in newsList" :key="index">
+          <CardView :news="news" />
         </div>
       </div>
     </div>
-    <div>
-      <FooterView />
-    </div>
+  </div>
+  <div>
+    <FooterView />
   </div>
 </template>
 
@@ -23,6 +23,7 @@
 import NavBar from '@/components/NavBar.vue';
 import CardView from '@/components/CardView.vue';
 import Axios from 'axios';
+import SearchBar from '@/components/SearchBar.vue';
 import FooterView from '../components/FooterView.vue';
 
 export default {
@@ -36,6 +37,7 @@ export default {
     NavBar,
     CardView,
     FooterView,
+    SearchBar,
   },
   mounted() {
     this.getNewsList();
@@ -49,6 +51,9 @@ export default {
           this.newsList = response.data && response.data.articles;
         }
       });
+    },
+    updateNewsList(list) {
+      this.newsList = list;
     },
   },
 };
