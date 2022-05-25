@@ -41,7 +41,10 @@
             ></path>
           </svg>
         </button>
-        <div :class="[showMenu ? 'flex' : 'hidden', 'w-full md:block md:w-auto']" id="mobile-menu">
+        <div
+          :class="[showMenu ? 'flex' : 'hidden', 'w-full md:block md:w-auto sm:w-full']"
+          id="mobile-menu"
+        >
           <ul
             class="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium w-full"
           >
